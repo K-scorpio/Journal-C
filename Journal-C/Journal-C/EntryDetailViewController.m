@@ -33,11 +33,13 @@
 
 - (IBAction)saveButtonTapped:(id)sender {
     if (self.entry) {
-        self.entryTitleTextField.text = self.entry.title;
-        self.entryBodyTextField.text = self.entry.bodyText;
+        self.entry.title = self.entryTitleTextField.text;
+        self.entry.bodyText = self.entryBodyTextField.text;
+        self.entry.timestamp = [NSDate date];
     } else {
         Entry *entry = [[Entry alloc]initWithTitle: self.entryTitleTextField.text andBodyText: self.entryBodyTextField.text andTimestamp:[[NSDate alloc] init]];
         [[EntryController sharedInstance]addEntry:entry];
+        self.entry = entry;
     }
     [self.navigationController popViewControllerAnimated:true];
 }
